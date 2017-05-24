@@ -4,7 +4,7 @@ Documentation for Dedupe Web API. Available on [readthedocs.io](http://dedupe-we
 
 ## Set-up 
 
-Read the Docs suggests using Sphinx, a tool to facilitate the generation of nice-looking documentation. Before you install Sphinx, you may want to set-up a virtualized development environment. Learn moreL [virtualenv](http://virtualenv.readthedocs.org/en/latest/virtualenv.html) and [virtualenvwrapper](http://virtualenvwrapper.readthedocs.org/en/latest/install.html). [Read how to set up virtualenv](http://docs.python-guide.org/en/latest/dev/virtualenvs/).
+Read the Docs suggests using Sphinx, a tool to facilitate the generation of nice-looking documentation. Before you install Sphinx, you may want to set-up a virtualized development environment: learn [how to set up virtualenv](http://docs.python-guide.org/en/latest/dev/virtualenvs/).
 
 Then, run the following in your terminal:
 
