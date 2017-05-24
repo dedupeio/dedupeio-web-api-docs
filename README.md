@@ -21,11 +21,17 @@ Afterwards, whenever you want to use this virtual environment, run `workon web-a
 
 You can learn about the process of Sphinx and document creation on the [Read the Docs site](http://docs.readthedocs.io/en/latest/getting_started.html).
 
-Ready to dive in? Edit the `rst` files in the `docs` directory. Then, generate the html, and view your results: you can do this by running the Makefile.
+Ready to dive in? Edit the `rst` files in the `docs` directory. Then, generate the html by running the Makefile:
 
 ```bash
 cd docs
 make html
+```
+
+Then, view your code in a browser:
+
+```bash
+open _build/html/index.html
 ```
 
 ## Team
