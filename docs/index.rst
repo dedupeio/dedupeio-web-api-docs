@@ -140,7 +140,6 @@ Example python script using the match endpoint
   # print the response from Dedupe.io
   print(r.json())
 
-
 .. toctree::
     :maxdepth: 1
 
