@@ -4,64 +4,62 @@ Dedupe.io web API documentation
 
 Overview
 ========
-Dedupe.io is a a software as a service  platform for quickly and accurately identifying clusters of similar records across one or more files or databases. 
+Dedupe.io is a a software as a service platform for quickly and accurately identifying clusters of similar records across one or more files or databases. 
 
 When to use the web API
 =======================
-Once you have completed the de-duping process for a dataset, you can continue to incrementally check, match and add to it via API calls. 
+Once you have completed the de-duping process for a project, you can continue to incrementally check, match and add to it via API calls. 
  
-By posting a chunk of data to the API (described in the **match** endpoint), dedupe.io can compare it to your dataset and return one or more potential matches. In the case where more than one result is returned, you can optionally tell dedupe.io which one is correct and it will update the training for your dataset based on it (described in the **train** endpoint).
+By posting a chunk of data to the API (described in the **match** endpoint), Dedupe.io can compare it to your dataset and return one or more potential matches. In the case where more than one result is returned, you can optionally tell Dedupe.io which one is correct and it will update the training for your dataset based on it (described in the **train** endpoint).
 
-Match endpoint
-==============
+Sending records to match
+========================
 
-Expects:
- 
-  * **api_key** user API key (GUID)
+.. http:post:: /match
 
-  * **project_id** identifier for project to match against (GUID)
+   Send one record to check for matches against a Dedupe.io project
 
-  * **object** dictionary of field values for one product (must match data model provided by client)
+   :query api_key: user API key
+   :query project_id: identifier for project to match against
+   :query object: dictionary of field values for one product (must match data model provided by client)
+   :query num_results: number of results to return (default: 5)
+   :query threshold: minimum matching confidence score of results returned
 
-  * **num_results** number of results to return (default: 5)
+   **Example request**:
 
-  * **threshold** minimum matching confidence score of results returned
+   .. sourcecode:: http
 
-Example:
+      POST /match HTTP/1.1
+      Host: dedupe.io
+      Accept: application/json, text/javascript
 
-::
+      {
+        'api_key': '50b400ed-cc7f-4bbb-b16f-13dbdc022e91',
+        'project_id': 'ebfc2317-7050-4e89-992c-56bcab13f1a1',
+        'object': { 'name': 'lettuce', 'size': '1kg' },
+        'num_results': 3,
+        'threshold': 0.8,
+      }
 
-    {
-      'api_key': '50b400ed-cc7f-4bbb-b16f-13dbdc022e91',
-      'project_id': 'ebfc2317-7050-4e89-992c-56bcab13f1a1',
-      'object': { 'name': 'lettuce', 'size': '1kg' },
-      'num_results': 3,
-      'threshold': 0.8,
-    }
+   **Example response**:
 
-Response:
+   .. sourcecode:: http
 
-  * object original object to match
+      HTTP/1.1 200 OK
+      Vary: Accept
+      Content-Type: text/javascript
 
-  * matches list of objects and match confidence of size num_results that dedupe found as matches
-
-  * api_key customer API key (GUID)
-
-Example: 
-
-:: 
-
-    {
-      'object': { 'name': 'letttuce', 'size': '1kg' },
-      'matches': [
-        { 'name': 'lettuce', 'size': '1kg', 'entity_id': 11345, 'match_confidence': 0.94 },
-        { 'name': 'beans', 'size': '1kg', 'entity_id': 12245, 'match_confidence': 0.32 },
-        { 'name': 'rice', 'size': '1kg', 'entity_id': 12335, 'match_confidence': 0.10 },
-        { 'name': 'chicken', 'size': '1kg', 'entity_id': 12344, 'match_confidence': 0.09 },
-        { 'name': 'grapes', 'size': '1kg', 'entity_id': 123455, 'match_confidence': 0.07 }
-      ],
-      'api_key': '929E624D-6DD7-4A2E-98AD-4A56D37A3D2A'
-    }
+      {
+        'object': { 'name': 'letttuce', 'size': '1kg' },
+        'matches': [
+          { 'name': 'lettuce', 'size': '1kg', 'entity_id': 11345, 'match_confidence': 0.94 },
+          { 'name': 'beans', 'size': '1kg', 'entity_id': 12245, 'match_confidence': 0.32 },
+          { 'name': 'rice', 'size': '1kg', 'entity_id': 12335, 'match_confidence': 0.10 },
+          { 'name': 'chicken', 'size': '1kg', 'entity_id': 12344, 'match_confidence': 0.09 },
+          { 'name': 'grapes', 'size': '1kg', 'entity_id': 123455, 'match_confidence': 0.07 }
+        ],
+        'api_key': '50b400ed-cc7f-4bbb-b16f-13dbdc022e91'
+      }
 
 
 The user will want to act based on the response of this API call in one of three ways. 
@@ -74,78 +72,49 @@ The user will want to act based on the response of this API call in one of three
 
 Any changes to the canonical database must be made by the user. Dedupe will not have write access to the user's database.
 
-Train endpoint
-==============
+Providing training from matches
+===============================
 
-Expects:
+.. http:post:: /train
 
-  * object original object to match
+   Send a tagged record to a Dedupe.io project for training. 
 
-  * matches list of objects with a match flag attribute flagged by a human reviewer
+   This API call should only get zero or one positive matches. If more than one positive match is provided, it means the canonical database of products is not canonical and should be corrected on the client's side.
 
-  * api_key customer API key (GUID)
-
-Example: 
-
-:: 
-
-    {
-      'object': { 'name': 'letttuce', 'size': '1kg'},
-      'matches': [
-        { 'name': 'lettuce', 'size': '1kg', 'entity_id': 11345, 'match': 1 },
-        { 'name': 'beans', 'size': '1kg', 'entity_id': 12245, 'match': 0 },
-        { 'name': 'rice', 'size': '1kg', 'entity_id': 12335, 'match': 0 },
-        { 'name': 'chicken', 'size': '1kg', 'entity_id': 12344, 'match': 0 },
-        { 'name': 'grapes', 'size': '2kg', 'entity_id': 123455, 'match': 0 }
-      ],
-      'api_key': '929E624D-6DD7-4A2E-98AD-4A56D37A3D2A'
-    }
-
-Response:
-
-This API call should only get zero or one positive matches. If more than one positive match is provided, it means the canonical database of products is not canonical and should be corrected on the client's side.
-
-  * status - 200 for success or 500 for error
-
-::
-
-    {
-      'status': 200
-    }
-
-Example python script using the match endpoint
-==============================================
-
-.. code-block:: python 
-
-  import requests
-  import json
+   :query api_key: customer API key
+   :query project_id: identifier for project to train
+   :query object: original object to match
+   :query matches: list of objects with a match flag attribute flagged by a human reviewer
    
-  # set your session IDs
-  API_KEY = 'YOUR API KEY'
-  SESS_ID = 'YOUR SESSION ID'
-   
-  # the field names in the match_object must match the field names in your session
-  match_object = {
-    "name": 'john smith',
-    "address": '222 W Merchandise Mart Plz, Chicago IL',
-    "phone": "(555) 725-0195"
-  }
-   
-  # post the
-  post_data = {
-    'api_key': API_KEY,
-    'session_id': SESS_ID,
-    'threshold': 0.5, # set this to a value between 0 and 1 for how conservative the returned matches should be
-    'object': match_object
-  }
-   
-  r = requests.post('https://app.dedupe.io/match/',
-  data=json.dumps(post_data))
-   
-  # print the response from Dedupe.io
-  print(r.json())
+   **Example request**:
+
+   .. sourcecode:: http
+
+      POST /train HTTP/1.1
+      Host: dedupe.io
+      Accept: application/json, text/javascript
+
+      {
+        'object': { 'name': 'letttuce', 'size': '1kg'},
+        'matches': [
+          { 'name': 'lettuce', 'size': '1kg', 'entity_id': 11345, 'match': 1 },
+          { 'name': 'beans', 'size': '1kg', 'entity_id': 12245, 'match': 0 },
+          { 'name': 'rice', 'size': '1kg', 'entity_id': 12335, 'match': 0 },
+          { 'name': 'chicken', 'size': '1kg', 'entity_id': 12344, 'match': 0 },
+          { 'name': 'grapes', 'size': '2kg', 'entity_id': 123455, 'match': 0 }
+        ],
+        'api_key': '50b400ed-cc7f-4bbb-b16f-13dbdc022e91'
+      }
+
+   **Example response**:
+
+   .. sourcecode:: http
+
+      HTTP/1.1 200 OK
+      Vary: Accept
+      Content-Type: text/javascript
 
 .. toctree::
     :maxdepth: 1
 
+    Python-example
