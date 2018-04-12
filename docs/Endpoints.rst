@@ -1,7 +1,7 @@
 Sending records to match
 ========================
 
-.. http:post:: /match
+.. http:post:: /api/v1/match
 
    Send one record to check for matches against a Dedupe.io project
 
@@ -15,7 +15,7 @@ Sending records to match
 
    .. sourcecode:: http
 
-      POST /match HTTP/1.1
+      POST /api/v1/match HTTP/1.1
       Host: dedupe.io
       Accept: application/json, text/javascript
 
@@ -61,7 +61,7 @@ Any changes to the canonical database must be made by the user. Dedupe will not 
 Providing training from matches
 ===============================
 
-.. http:post:: /train
+.. http:post:: /api/v1/train
 
    Send a tagged record to a Dedupe.io project for training. 
 
@@ -76,7 +76,7 @@ Providing training from matches
 
    .. sourcecode:: http
 
-      POST /train HTTP/1.1
+      POST /api/v1/train HTTP/1.1
       Host: dedupe.io
       Accept: application/json, text/javascript
 

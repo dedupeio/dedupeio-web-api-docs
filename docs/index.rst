@@ -12,6 +12,13 @@ Once you have completed the de-duping process for a project, you can continue to
  
 By posting a chunk of data to the API (described in the **match** endpoint), Dedupe.io can compare it to your dataset and return one or more potential matches. In the case where more than one result is returned, you can optionally tell Dedupe.io which one is correct and it will update the training for your dataset based on it (described in the **train** endpoint).
 
+API access
+==========
+
+API access is available for Dedupe.io Enterprise customers. If you are interested in an Enterprise account, contact us at `dedupe@datamade.us <mailto:dedupe@datamade.us>`_.
+
+All methods are accessed via: **https://dedupe.io/api/v1/ENDPOINT**
+
 .. toctree::
     :maxdepth: 1
 
