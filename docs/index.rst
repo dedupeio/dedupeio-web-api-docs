@@ -1,13 +1,13 @@
-===========================
-Dedupe.io API documentation 
-===========================
+===============================
+Dedupe.io web API documentation 
+===============================
 
 Overview
 ========
 Dedupe.io is a a software as a service  platform for quickly and accurately identifying clusters of similar records across one or more files or databases. 
 
-When to use the API
-===================
+When to use the web API
+=======================
 Once you have completed the de-duping process for a dataset, you can continue to incrementally check, match and add to it via API calls. 
  
 By posting a chunk of data to the API (described in the **match** endpoint), dedupe.io can compare it to your dataset and return one or more potential matches. In the case where more than one result is returned, you can optionally tell dedupe.io which one is correct and it will update the training for your dataset based on it (described in the **train** endpoint).
@@ -16,21 +16,27 @@ Match endpoint
 ==============
 
 Expects:
+ 
+  * **api_key** user API key (GUID)
 
-  * object dictionary of field values for one product (must match data model provided by client)
+  * **project_id** identifier for project to match against (GUID)
 
-  * num_results number of results to return (max: 10, default: 5)
+  * **object** dictionary of field values for one product (must match data model provided by client)
 
-  * api_key customer API key (GUID)
+  * **num_results** number of results to return (default: 5)
+
+  * **threshold** minimum matching confidence score of results returned
 
 Example:
 
 ::
 
     {
+      'api_key': '50b400ed-cc7f-4bbb-b16f-13dbdc022e91',
+      'project_id': 'ebfc2317-7050-4e89-992c-56bcab13f1a1',
       'object': { 'name': 'lettuce', 'size': '1kg' },
-      'num_results': 5,
-      'api_key': '929E624D-6DD7-4A2E-98AD-4A56D37A3D2A',
+      'num_results': 3,
+      'threshold': 0.8,
     }
 
 Response:
