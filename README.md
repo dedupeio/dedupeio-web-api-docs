@@ -1,6 +1,6 @@
-# web-api-documentation
+# Dedupe.io web API documentation
 
-Documentation for Dedupe Web API. Available on [readthedocs.io](http://dedupe-web-api.readthedocs.io/en/latest/).
+Documentation for Dedupe.io web API: https://apidocs.dedupe.io
 
 ## Set-up 
 
@@ -9,9 +9,9 @@ Read the Docs suggests using Sphinx, a tool to facilitate the generation of nice
 Then, run the following in your terminal:
 
 ```bash
-mkvirtualenv web-api-documentation
-git clone git@github.com:dedupeio/web-api-documentation.git
-cd web-api-documentation
+mkvirtualenv dedupeio-web-api-doc
+git clone git@github.com:dedupeio/dedupeio-web-api-doc.git
+cd dedupeio-web-api-doc
 pip install -r requirements.txt
 ```
 
@@ -38,3 +38,4 @@ open _build/html/index.html
 
 * Forest Gregg, DataMade 
 * Regina Compton, DataMade 
+* Derek Eder, DataMade
