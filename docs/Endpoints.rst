@@ -20,11 +20,11 @@ Sending records to match
       Accept: application/json, text/javascript
 
       {
-        'api_key': '50b400ed-cc7f-4bbb-b16f-13dbdc022e91',
-        'project_id': 'ebfc2317-7050-4e89-992c-56bcab13f1a1',
-        'object': { 'name': 'lettuce', 'size': '1kg' },
-        'num_results': 3,
-        'threshold': 0.8,
+        "api_key": "50b400ed-cc7f-4bbb-b16f-13dbdc022e91",
+        "project_id": "ebfc2317-7050-4e89-992c-56bcab13f1a1",
+        "object": { "name": "lettuce", "size": "1kg" },
+        "num_results": 3,
+        "threshold": 0.8,
       }
 
    **Example response**:
@@ -36,15 +36,15 @@ Sending records to match
       Content-Type: text/javascript
 
       {
-        'object': { 'name': 'letttuce', 'size': '1kg' },
-        'matches': [
-          { 'name': 'lettuce', 'size': '1kg', 'entity_id': 11345, 'match_confidence': 0.94 },
-          { 'name': 'beans', 'size': '1kg', 'entity_id': 12245, 'match_confidence': 0.32 },
-          { 'name': 'rice', 'size': '1kg', 'entity_id': 12335, 'match_confidence': 0.10 },
-          { 'name': 'chicken', 'size': '1kg', 'entity_id': 12344, 'match_confidence': 0.09 },
-          { 'name': 'grapes', 'size': '1kg', 'entity_id': 123455, 'match_confidence': 0.07 }
+        "object": { "name": "letttuce", "size": "1kg" },
+        "matches": [
+          { "name": "lettuce", "size": "1kg", "entity_id": 11345, "match_confidence": 0.94 },
+          { "name": "beans", "size": "1kg", "entity_id": 12245, "match_confidence": 0.32 },
+          { "name": "rice", "size": "1kg", "entity_id": 12335, "match_confidence": 0.10 },
+          { "name": "chicken", "size": "1kg", "entity_id": 12344, "match_confidence": 0.09 },
+          { "name": "grapes", "size": "1kg", "entity_id": 123455, "match_confidence": 0.07 }
         ],
-        'api_key': '50b400ed-cc7f-4bbb-b16f-13dbdc022e91'
+        "api_key": "50b400ed-cc7f-4bbb-b16f-13dbdc022e91"
       }
 
 
@@ -81,15 +81,15 @@ Providing training from matches
       Accept: application/json, text/javascript
 
       {
-        'object': { 'name': 'letttuce', 'size': '1kg'},
-        'matches': [
-          { 'name': 'lettuce', 'size': '1kg', 'entity_id': 11345, 'match': 1 },
-          { 'name': 'beans', 'size': '1kg', 'entity_id': 12245, 'match': 0 },
-          { 'name': 'rice', 'size': '1kg', 'entity_id': 12335, 'match': 0 },
-          { 'name': 'chicken', 'size': '1kg', 'entity_id': 12344, 'match': 0 },
-          { 'name': 'grapes', 'size': '2kg', 'entity_id': 123455, 'match': 0 }
+        "object": { "name": "letttuce", "size": "1kg"},
+        "matches": [
+          { "name": "lettuce", "size": "1kg", "entity_id": 11345, "match": 1 },
+          { "name": "beans", "size": "1kg", "entity_id": 12245, "match": 0 },
+          { "name": "rice", "size": "1kg", "entity_id": 12335, "match": 0 },
+          { "name": "chicken", "size": "1kg", "entity_id": 12344, "match": 0 },
+          { "name": "grapes", "size": "2kg", "entity_id": 123455, "match": 0 }
         ],
-        'api_key': '50b400ed-cc7f-4bbb-b16f-13dbdc022e91'
+        "api_key": "50b400ed-cc7f-4bbb-b16f-13dbdc022e91"
       }
 
    **Example response**:
