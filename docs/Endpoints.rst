@@ -1,13 +1,13 @@
 Sending records to match
 ========================
 
-.. http:post:: /api/v1/match
+.. http:post:: /api/v1/match/
 
    Send one record to check for matches against a Dedupe.io project
 
    :query api_key: user API key
    :query project_id: identifier for project to match against
-   :query object: dictionary of field values for one product (must match data model provided by client)
+   :query object: dictionary of field values for one record. This must match the fields you selected when setting up your project. All field names will be prefixed with **abs_** lower cased and with no spaces.
    :query num_results: number of results to return (default: 5)
    :query threshold: minimum matching confidence score of results returned
 
@@ -15,16 +15,19 @@ Sending records to match
 
    .. sourcecode:: http
 
-      POST /api/v1/match HTTP/1.1
+      POST /api/v1/match/ HTTP/1.1
       Host: dedupe.io
       Accept: application/json, text/javascript
 
       {
         "api_key": "50b400ed-cc7f-4bbb-b16f-13dbdc022e91",
         "project_id": "ebfc2317-7050-4e89-992c-56bcab13f1a1",
-        "object": { "name": "lettuce", "size": "1kg" },
-        "num_results": 3,
-        "threshold": 0.8,
+        "object": {
+          "site_name": "Korean American Community Services",
+          "address": "4300 North California Ave.   60618",
+          "phone": "5838281"
+        },
+        "threshold": 0.8
       }
 
    **Example response**:
@@ -36,15 +39,28 @@ Sending records to match
       Content-Type: text/javascript
 
       {
-        "object": { "name": "letttuce", "size": "1kg" },
         "matches": [
-          { "name": "lettuce", "size": "1kg", "entity_id": 11345, "match_confidence": 0.94 },
-          { "name": "beans", "size": "1kg", "entity_id": 12245, "match_confidence": 0.32 },
-          { "name": "rice", "size": "1kg", "entity_id": 12335, "match_confidence": 0.10 },
-          { "name": "chicken", "size": "1kg", "entity_id": 12344, "match_confidence": 0.09 },
-          { "name": "grapes", "size": "1kg", "entity_id": 123455, "match_confidence": 0.07 }
+          {
+            "confidence": "1.0",
+            "processed_record": {
+              "abs_site_name": "korean american community services",
+              "abs_address": "4300 north california ave. 60618",
+              "abs_phone": "5838281",
+              "record_id": 92
+            },
+            "cluster_id": "f44df274-3055-4aae-b8d2-f3680df37b4c",
+            "raw_record": {
+              "site_name": " Korean American Community Services ",
+              "zip": "60618",
+              "record_id": 92,
+              "source": "NAEYC_accreditation.csv",
+              "address": "4300 North California Ave.  ",
+              "phone": "5838281",
+              "fax": null
+            }
+          }
         ],
-        "api_key": "50b400ed-cc7f-4bbb-b16f-13dbdc022e91"
+        "status": "ok"
       }
 
 
@@ -61,7 +77,7 @@ Any changes to the canonical database must be made by the user. Dedupe will not 
 Providing training from matches
 ===============================
 
-.. http:post:: /api/v1/train
+.. http:post:: /api/v1/train/
 
    Send a tagged record to a Dedupe.io project for training. 
 
@@ -76,7 +92,7 @@ Providing training from matches
 
    .. sourcecode:: http
 
-      POST /api/v1/train HTTP/1.1
+      POST /api/v1/train/ HTTP/1.1
       Host: dedupe.io
       Accept: application/json, text/javascript
 
