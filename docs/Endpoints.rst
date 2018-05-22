@@ -3,7 +3,9 @@ Sending records to match
 
 .. http:post:: /api/v1/match/
 
-   Send one record to check for matches against a Dedupe.io project
+   Send one record to check for matches against a Dedupe.io project.
+
+   This endpoint is currently only available for completed (de-duplicated) projects with one uploaded file.
 
    :query api_key: user API key
    :query project_id: identifier for project to match against
