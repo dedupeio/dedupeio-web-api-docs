@@ -99,16 +99,15 @@ Providing training from matches
       Accept: application/json, text/javascript
 
       {
-        "object": { "name": "letttuce", "size": "1kg"},
+        "api_key": "50b400ed-cc7f-4bbb-b16f-13dbdc022e91",
+        "project_id": "ebfc2317-7050-4e89-992c-56bcab13f1a1",
+        "object": { "site_name": "Carole Robertson Center for Learning", "address": "2929 w. 19th st. 60623", "phone": " "},
         "matches": [
-          { "name": "lettuce", "size": "1kg", "entity_id": 11345, "match": 1 },
-          { "name": "beans", "size": "1kg", "entity_id": 12245, "match": 0 },
-          { "name": "rice", "size": "1kg", "entity_id": 12335, "match": 0 },
-          { "name": "chicken", "size": "1kg", "entity_id": 12344, "match": 0 },
-          { "name": "grapes", "size": "2kg", "entity_id": 123455, "match": 0 }
-        ],
-        "api_key": "50b400ed-cc7f-4bbb-b16f-13dbdc022e91"
-      }
+          { "site_name": "Carole Robertson", "address": "2929 w. 19th st. 60623", "phone": "5211600", "match": 1 },
+          { "site_name": "Rob Robertson", "address": "2920 w. 19th st. 60623", "phone": "5211600", "match": 0 },
+          { "site_name": "Joseph Robertson", "address": "2929 w. 17th st.", "phone": "5211600", "match": 0 }
+        ]
+       }
 
    **Example response**:
 
