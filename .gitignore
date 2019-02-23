@@ -101,3 +101,4 @@ ENV/
 .mypy_cache/
 
 .DS_Store
+test_api_settings.py
