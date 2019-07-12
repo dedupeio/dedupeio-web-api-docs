@@ -74,8 +74,6 @@ The user will want to act based on the response of this API call in one of three
 
   3. **more than one** of the matches returned is correct - the canonical database is not canonical and products should be merged
 
-Any changes to the canonical database must be made by the user. Dedupe will not have write access to the user's database.
-
 Providing training from matches
 ===============================
 
