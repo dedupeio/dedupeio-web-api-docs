@@ -17,7 +17,7 @@ API access
 
 API access is available for Dedupe.io Enterprise customers. If you are interested in an Enterprise account, contact us at `dedupe@datamade.us <mailto:dedupe@datamade.us>`_.
 
-All methods are accessed via: **https://dedupe.io/api/v1/ENDPOINT**
+All methods are accessed via: **https://app.dedupe.io/api/v1/ENDPOINT**
 
 .. toctree::
     :maxdepth: 1
