@@ -1,4 +1,193 @@
-Sending records to match
+projects/
+========================
+
+.. http:post:: /api/v1/projects/
+
+   Get a list of Dedupe.io projects associated with an account.
+
+   :query api_key: user API key
+   :query order_by: field to sort on. Supports **name** and **date_added**
+   :query descending: **true** or **false**. If true, sorts descending, otherwise sorts ascending.  
+
+   **Example request**:
+
+   .. sourcecode:: http
+
+      POST /api/v1/projects/ HTTP/1.1
+      Host: app.dedupe.io
+      Accept: application/json, text/javascript
+
+      {
+        "api_key": "50b400ed-cc7f-4bbb-b16f-13dbdc022e91",
+        "order_by": "date_added",
+        "descending": "true"
+      }
+
+   **Example response**:
+
+   .. sourcecode:: http
+
+      HTTP/1.1 200 OK
+      Vary: Accept
+      Content-Type: text/javascript
+
+      {
+        "status": "ok",
+        "projects": [
+          {
+            "id": "2ce57916-1d34-4ad5-bddb-f043ef701e45",
+            "name": "Early Childhood Deduplication",
+            "description": "",
+            "date_added": "2020-01-09T19:11:48.656659+00:00",
+            "date_updated": null,
+            "datasets": [
+              {
+                "id": "db387e58-18b1-4663-b0b1-70f21cf9ad4f",
+                "name": "Early Childhood Programs",
+                "status": "canonical",
+                "record_count": 3337,
+                "entity_count": 1234,
+                "review_count": 108,
+                "description": "",
+                "processing": false,
+                "date_added": "2020-01-09T19:11:48.656659+00:00",
+                "date_updated": "2020-01-09T19:18:54.001089+00:00",
+                "field_mapping": {
+                  "abs_phone": [
+                    "phone"
+                  ],
+                  "abs_address": [
+                    "address",
+                    "zip"
+                  ],
+                  "abs_site_name": [
+                    "site_name"
+                  ]
+                },
+                "status_info": {
+                  "step": 5,
+                  "machine_name": "canonical",
+                  "human_name": "Dataset is de-duped",
+                  "next_step_name": "Dataset is de-duped!",
+                  "next_step_url": "/entity-browser/?project_id=db387e58-18b1-4663-b0b1-70f21cf9ad4f",
+                  "next_step": null
+                }
+              },
+              {
+                "id": "05458c7d-a639-4532-9933-fdf8b97c4e66",
+                "name": "File 2",
+                "status": "model defined",
+                "record_count": 800,
+                "entity_count": null,
+                "review_count": null,
+                "description": "",
+                "processing": false,
+                "date_added": "2020-01-09T19:39:25.134078+00:00",
+                "date_updated": "2020-01-09T19:40:38.591402+00:00",
+                "field_mapping": {
+                  "abs_phone": [
+                    "phone"
+                  ],
+                  "abs_address": [
+                    "address",
+                    "zip"
+                  ],
+                  "abs_site_name": [
+                    "site_name"
+                  ]
+                },
+                "status_info": {
+                  "step": 1,
+                  "machine_name": "model defined",
+                  "human_name": "Model defined",
+                  "next_step_name": "Train model",
+                  "next_step_url": "/train-model/?dataset_id=05458c7d-a639-4532-9933-fdf8b97c4e66",
+                  "next_step": 2
+                }
+              }
+            ]
+          },
+          {
+            "id": "49e21187-f091-496e-8b99-e92c24d4d332",
+            "name": "Restaurant matching",
+            "description": "Merge restaurant lists",
+            "date_added": "2017-10-09T19:24:43.491660+00:00",
+            "date_updated": null,
+            "datasets": [
+              {
+                "id": "2cdf3d1d-ad2d-4f56-9cba-caf22d3e5b78",
+                "name": "Restaurants 2",
+                "status": "linked",
+                "record_count": 752,
+                "entity_count": 779,
+                "review_count": 23,
+                "description": "A second list of restaurants",
+                "processing": false,
+                "date_added": "2017-10-09T19:25:36.670140+00:00",
+                "date_updated": "2017-10-09T19:29:58.523173+00:00",
+                "field_mapping": {
+                  "abs_city": [
+                    "city_2"
+                  ],
+                  "abs_name": [
+                    "name_2"
+                  ],
+                  "abs_address": [
+                    "address_2"
+                  ],
+                  "abs_cuisine": [
+                    "cuisine_2"
+                  ]
+                },
+                "status_info": {
+                  "step": 4,
+                  "machine_name": "linked",
+                  "human_name": "Dataset is linked",
+                  "next_step_name": "Linked!",
+                  "next_step_url": "/entity-browser/?project_id=2cdf3d1d-ad2d-4f56-9cba-caf22d3e5b78",
+                  "next_step": null
+                }
+              },
+              {
+                "id": "cb4b2c5d-8485-4395-9783-4cb69edb9bfa",
+                "name": "Restaurants 1",
+                "status": "canonical",
+                "record_count": 112,
+                "entity_count": null,
+                "review_count": null,
+                "description": "Names, addresses and cuisines for a list of restaurants",
+                "processing": false,
+                "date_added": "2017-10-09T19:24:43.491660+00:00",
+                "date_updated": "2017-10-09T19:24:46.103786+00:00",
+                "field_mapping": {
+                  "abs_city": [
+                    "city"
+                  ],
+                  "abs_name": [
+                    "name"
+                  ],
+                  "abs_address": [
+                    "address"
+                  ],
+                  "abs_cuisine": [
+                    "cuisine"
+                  ]
+                },
+                "status_info": {
+                  "step": 5,
+                  "machine_name": "canonical",
+                  "human_name": "Dataset is de-duped",
+                  "next_step_name": "Dataset is de-duped!",
+                  "next_step_url": "/entity-browser/?project_id=cb4b2c5d-8485-4395-9783-4cb69edb9bfa",
+                  "next_step": null
+                }
+              }
+            ]
+          }
+        ]
+      }
+
+match/
 ========================
 
 .. http:post:: /api/v1/match/
@@ -9,7 +198,7 @@ Sending records to match
 
    :query api_key: user API key
    :query project_id: identifier for project to match against
-   :query object: dictionary of field values for one record. This must match the fields you selected when setting up your project. All field names will be prefixed with **abs_** lower cased and with no spaces.
+   :query object: dictionary of field values for one record. This must match the fields you selected when setting up your project. All field names will be lower cased and with no spaces.
    :query num_results: number of results to return (default: 5)
    :query threshold: minimum matching confidence score of results returned
 
@@ -18,7 +207,7 @@ Sending records to match
    .. sourcecode:: http
 
       POST /api/v1/match/ HTTP/1.1
-      Host: dedupe.io
+      Host: app.dedupe.io
       Accept: application/json, text/javascript
 
       {
@@ -74,7 +263,7 @@ The user will want to act based on the response of this API call in one of three
 
   3. **more than one** of the matches returned is correct - the canonical database is not canonical and products should be merged
 
-Providing training from matches
+train/
 ===============================
 
 .. http:post:: /api/v1/train/
@@ -93,7 +282,7 @@ Providing training from matches
    .. sourcecode:: http
 
       POST /api/v1/train/ HTTP/1.1
-      Host: dedupe.io
+      Host: app.dedupe.io
       Accept: application/json, text/javascript
 
       {
