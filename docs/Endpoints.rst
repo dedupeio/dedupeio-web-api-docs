@@ -6,7 +6,7 @@ projects/
    Get a list of Dedupe.io projects associated with an account.
 
    :query api_key: user API key
-   :query order_by: field to sort on. Supports **name** and **date_added**
+   :query order_by: field to sort on. Supports **name** and **date_added**. Defaults to **date_added**.
    :query descending: **true** or **false**. If true, sorts descending, otherwise sorts ascending.  
 
    **Example request**:
