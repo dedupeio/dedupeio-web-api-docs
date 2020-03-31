@@ -2,6 +2,8 @@
 
 Documentation for Dedupe.io web API: https://apidocs.dedupe.io
 
+Part of the [Dedupe.io](https://dedupe.io/) cloud service and open source toolset for de-duplicating and finding fuzzy matches in your data.
+
 ## Set-up 
 
 Read the Docs suggests using Sphinx, a tool to facilitate the generation of nice-looking documentation. Before you install Sphinx, you may want to set-up a virtualized development environment: learn [how to set up virtualenv](http://docs.python-guide.org/en/latest/dev/virtualenvs/).
