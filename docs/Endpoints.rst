@@ -194,7 +194,7 @@ match/
 
    Send one record to check for matches against a Dedupe.io project.
 
-   This endpoint is currently only available for completed (de-duplicated) projects with one uploaded file.
+   This endpoint is currently only available for completed (de-duplicated) projects.
 
    :query api_key: user API key
    :query project_id: identifier for project to match against
@@ -262,6 +262,66 @@ The user will want to act based on the response of this API call in one of three
   2. **one** of the matches returned is correct - the product should be associated with the proper ID 
 
   3. **more than one** of the matches returned is correct - the canonical database is not canonical and products should be merged
+
+add/
+========================
+
+.. http:post:: /api/v1/add/
+
+   Send one record to add to a Dedupe.io project.
+
+   This endpoint is only available for completed (de-duplicated) projects.
+
+   :query api_key: user API key
+   :query project_id: identifier for project to match against
+   :query object: dictionary of field values for one record. This must match the fields you selected when setting up your project. All field names will be lower cased and with no spaces.
+   :query cluster_id: unique cluster id for the cluster to add the record to. If this is not provided, a new cluster will be created and the record will be added to it.
+
+   **Example request**:
+
+   .. sourcecode:: http
+
+      POST /api/v1/add/ HTTP/1.1
+      Host: app.dedupe.io
+      Accept: application/json, text/javascript
+
+      {
+        "api_key": "50b400ed-cc7f-4bbb-b16f-13dbdc022e91",
+        "project_id": "ebfc2317-7050-4e89-992c-56bcab13f1a1",
+        "object": {
+          "site_name": "Korean American Comm Services",
+          "address": "4300 North California Ave",
+          "phone": "583-8281"
+        },
+        "cluster_id": "9ce76ed3-44c3-4aaf-baf9-cbe9fcf0c8b8"
+      }
+
+   **Example response**:
+
+   .. sourcecode:: http
+
+      HTTP/1.1 200 OK
+      Vary: Accept
+      Content-Type: text/javascript
+
+      {
+        "status": "ok", 
+        "message": "Record added successfully"
+      }
+
+
+If the added record already exists in the project, it will not be added and the API will return a 500 error:
+
+   .. sourcecode:: http
+
+      {
+        "detailed_error":false,
+        "error":"Record already exists",
+        "go_back":"/",
+        "message":"Record already exists",
+        "ready":false,
+        "status":"error"
+      }
 
 train/
 ===============================
