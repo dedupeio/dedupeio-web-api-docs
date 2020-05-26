@@ -15,7 +15,11 @@ By posting a chunk of data to the API (described in the **match** endpoint), Ded
 API access
 ==========
 
-API access is available for Dedupe.io Enterprise customers. If you are interested in an Enterprise account, contact us at `dedupe@datamade.us <mailto:dedupe@datamade.us>`_.
+API access is available for Dedupe.io Subscription accounts. For more information, see our `pricing page <https://dedupe.io/pricing/>`_.
+
+Your API key can be found on the `My Account page <https://app.dedupe.io/my-account/>`_.
+
+Your Project ID and example API calls can be found on the Settings page for your project.
 
 All methods are accessed via: **https://app.dedupe.io/api/v1/ENDPOINT**
 

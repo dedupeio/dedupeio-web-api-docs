@@ -314,6 +314,9 @@ If the added record already exists in the project, it will not be added and the 
 
    .. sourcecode:: http
 
+      HTTP/1.1 500 INTERNAL SERVER ERROR
+      Content-Type: text/javascript
+
       {
         "detailed_error":false,
         "error":"Record already exists",
